@@ -1,0 +1,6 @@
+framework module Pods_observables_test {
+  umbrella header "Pods-observables-test-umbrella.h"
+
+  export *
+  module * { export * }
+}

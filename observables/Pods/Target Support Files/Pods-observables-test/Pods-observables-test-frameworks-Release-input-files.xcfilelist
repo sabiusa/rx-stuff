@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-observables-test/Pods-observables-test-frameworks.sh
+${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework
+${BUILT_PRODUCTS_DIR}/RxRelay-macOS/RxRelay.framework
+${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework
