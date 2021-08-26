@@ -22,6 +22,7 @@ class observables_test: XCTestCase {
                     print("complete")
                 }
             )
+            .dispose()
         }
     }
     
@@ -40,6 +41,7 @@ class observables_test: XCTestCase {
                     print("complete")
                 }
             )
+            .dispose()
         }
     }
     
@@ -58,6 +60,7 @@ class observables_test: XCTestCase {
                     print("complete")
                 }
             }
+            .dispose()
         }
     }
     
@@ -73,6 +76,7 @@ class observables_test: XCTestCase {
                     print(fib)
                 }
             )
+            .dispose()
         }
     }
     
@@ -104,8 +108,11 @@ class observables_test: XCTestCase {
             
             Observable<String>.create { obs in
                 obs.onNext("1")
+                
                 obs.onCompleted()
+                
                 obs.onNext("?")
+                
                 return Disposables.create()
             }
             .subscribe(
@@ -118,4 +125,31 @@ class observables_test: XCTestCase {
         }
     }
 
+    func test_error() {
+        example(of: "error") {
+            let bag = DisposeBag()
+            
+            enum MyError: Error {
+                case myError
+            }
+            
+            Observable<String>.create { obs in
+                obs.onNext("1")
+                
+                obs.onError(MyError.myError)
+                
+                obs.onNext("?")
+                
+                return Disposables.create()
+            }
+            .subscribe(
+                onNext: { print($0) },
+                onError: { print($0) },
+                onCompleted: { print("completed") },
+                onDisposed: { print("disposed") }
+            )
+            .disposed(by: bag)
+        }
+    }
+    
 }
