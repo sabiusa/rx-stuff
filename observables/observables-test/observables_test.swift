@@ -152,4 +152,30 @@ class observables_test: XCTestCase {
         }
     }
     
+    func test_defer() {
+        example(of: "defer") {
+            let bag = DisposeBag()
+            
+            var flag = false
+            
+            let factory: Observable<Int> = Observable.deferred {
+                flag.toggle()
+                
+                if flag {
+                    return Observable.of(1, 2, 3)
+                } else {
+                    return Observable.of(4, 5, 6)
+                }
+            }
+            
+            for _ in 0 ... 3 {
+                factory.subscribe(onNext: {
+                    print($0, terminator: " ")
+                })
+                .disposed(by: bag)
+                
+                print()
+            }
+        }
+    }
 }
