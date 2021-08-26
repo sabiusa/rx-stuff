@@ -231,4 +231,27 @@ class observables_test: XCTestCase {
                 .disposed(by: bag)
         }
     }
+    
+    func test_do() {
+        example(of: "do") {
+            let bag = DisposeBag()
+            
+            Observable<Void>.never()
+                .do(onSubscribe: {
+                    print("Subscribed")
+                })
+                .subscribe(
+                    onNext: { element in
+                        print(element)
+                    },
+                    onCompleted: {
+                        print("Completed")
+                    },
+                    onDisposed: {
+                        print("Disposed")
+                    }
+                )
+                .disposed(by: bag)
+        }
+    }
 }
