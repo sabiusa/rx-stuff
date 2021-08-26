@@ -254,4 +254,16 @@ class observables_test: XCTestCase {
                 .disposed(by: bag)
         }
     }
+    
+    func test_debug() {
+        example(of: "debug") {
+            let bag = DisposeBag()
+            
+            Observable<Void>.never()
+                .debug("test-debug", trimOutput: false)
+                .subscribe(onDisposed: { print("Disposed") })
+                .disposed(by: bag)
+        }
+    }
+    
 }
