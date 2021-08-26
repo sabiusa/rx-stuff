@@ -75,5 +75,15 @@ class observables_test: XCTestCase {
             )
         }
     }
+    
+    func test_dispose() {
+        example(of: "dispose") {
+            let obs = Observable.of("A", "B", "C")
+            let subs = obs.subscribe { event in
+                print(event)
+            }
+            subs.dispose()
+        }
+    }
 
 }
