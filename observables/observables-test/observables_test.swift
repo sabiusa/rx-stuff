@@ -178,4 +178,57 @@ class observables_test: XCTestCase {
             }
         }
     }
+    
+    func test_trait_single() {
+        example(of: "Single") {
+            let bag = DisposeBag()
+            
+            enum FileError: Error {
+                case notFound
+                case unreadable
+                case encodingFailed
+            }
+            
+            func loadText(from fileName: String) -> Single<String> {
+                return Single.create { single in
+                    let disp = Disposables.create()
+                    
+                    let bundle = Bundle(for: Helper.self)
+                    
+                    guard let path = bundle.path(forResource: fileName, ofType: "txt")
+                    else {
+                        single(.error(FileError.notFound))
+                        return disp
+                    }
+                    
+                    guard let data = FileManager.default.contents(atPath: path)
+                    else {
+                        single(.error(FileError.unreadable))
+                        return disp
+                    }
+                    
+                    guard let content = String(data: data, encoding: .utf8)
+                    else {
+                        single(.error(FileError.encodingFailed))
+                        return disp
+                    }
+                    
+                    single(.success(content))
+                    return disp
+                }
+            }
+            
+            loadText(from: "text")
+                .subscribe { result in
+                    switch result {
+                    case .success(let content):
+                        print("File: ")
+                        print(content)
+                    case .error(let error):
+                        print("Error: ", error)
+                    }
+                }
+                .disposed(by: bag)
+        }
+    }
 }

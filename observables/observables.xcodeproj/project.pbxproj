@@ -12,6 +12,8 @@
 		3E154DC626D68F8300C59B47 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E154DC526D68F8300C59B47 /* Playground.swift */; };
 		3E154DCE26D6904D00C59B47 /* observables_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E154DCD26D6904D00C59B47 /* observables_test.swift */; };
 		3E154DD326D6940B00C59B47 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E154DC326D68E4800C59B47 /* Helpers.swift */; };
+		3E154DD526D7ACA400C59B47 /* text.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E154DD426D7ACA400C59B47 /* text.txt */; };
+		3E154DD626D7BB7D00C59B47 /* text.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3E154DD426D7ACA400C59B47 /* text.txt */; };
 		6336F2A0054D921471BCF3B2 /* Pods_observables.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35AA7A01029A9C112785030 /* Pods_observables.framework */; };
 		9E9DED97219B417577D2652B /* Pods_observables_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AD4C5F795394A146293BEF /* Pods_observables_test.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +29,7 @@
 		3E154DCB26D6904D00C59B47 /* observables-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "observables-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E154DCD26D6904D00C59B47 /* observables_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = observables_test.swift; sourceTree = "<group>"; };
 		3E154DCF26D6904D00C59B47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E154DD426D7ACA400C59B47 /* text.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = text.txt; sourceTree = "<group>"; };
 		AC1C1669DE62DD88FF284AA8 /* Pods-observables.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-observables.debug.xcconfig"; path = "Target Support Files/Pods-observables/Pods-observables.debug.xcconfig"; sourceTree = "<group>"; };
 		CB0A2E9C670184A1A81F0B7A /* Pods-observables-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-observables-test.debug.xcconfig"; path = "Target Support Files/Pods-observables-test/Pods-observables-test.debug.xcconfig"; sourceTree = "<group>"; };
 		E35AA7A01029A9C112785030 /* Pods_observables.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_observables.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +92,7 @@
 				3E154DBC26D68DC000C59B47 /* Info.plist */,
 				3E154DC326D68E4800C59B47 /* Helpers.swift */,
 				3E154DC526D68F8300C59B47 /* Playground.swift */,
+				3E154DD426D7ACA400C59B47 /* text.txt */,
 			);
 			path = observables;
 			sourceTree = "<group>";
@@ -207,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E154DD526D7ACA400C59B47 /* text.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E154DD626D7BB7D00C59B47 /* text.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
