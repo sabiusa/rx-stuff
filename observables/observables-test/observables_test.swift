@@ -114,6 +114,7 @@ class observables_test: XCTestCase {
                 onCompleted: { print("completed") },
                 onDisposed: { print("disposed") }
             )
+            .disposed(by: bag)
         }
     }
 
