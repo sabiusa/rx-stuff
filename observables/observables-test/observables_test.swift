@@ -97,5 +97,24 @@ class observables_test: XCTestCase {
                 .disposed(by: bag)
         }
     }
+    
+    func test_create() {
+        example(of: "create") {
+            let bag = DisposeBag()
+            
+            Observable<String>.create { obs in
+                obs.onNext("1")
+                obs.onCompleted()
+                obs.onNext("?")
+                return Disposables.create()
+            }
+            .subscribe(
+                onNext: { print($0) },
+                onError: { print($0) },
+                onCompleted: { print("completed") },
+                onDisposed: { print("disposed") }
+            )
+        }
+    }
 
 }
