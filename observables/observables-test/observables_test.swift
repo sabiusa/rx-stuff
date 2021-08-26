@@ -9,16 +9,6 @@ import XCTest
 import RxSwift
 
 class observables_test: XCTestCase {
-
-    func test_rx() {
-        let a = 1
-        
-        test_empty()
-        test_never()
-        test_singleValue()
-        
-        XCTAssertEqual(a, 1)
-    }
     
     func test_empty() {
         example(of: "empty") {
@@ -60,6 +50,7 @@ class observables_test: XCTestCase {
             let three = 3
           
             let obs = Observable.of(one, two, three)
+            
             obs.subscribe { event in
                 if let elem = event.element {
                     print(elem)
@@ -67,6 +58,21 @@ class observables_test: XCTestCase {
                     print("complete")
                 }
             }
+        }
+    }
+    
+    func test_range() {
+        example(of: "range") {
+            let obs = Observable<Int>.range(start: 1, count: 10)
+            
+            obs.subscribe(
+                onNext: { i in
+                    let n = Double(i)
+                    
+                    let fib = ((pow(1.61803, n) - pow(0.61803, n)) / 2.23606).rounded()
+                    print(fib)
+                }
+            )
         }
     }
 
