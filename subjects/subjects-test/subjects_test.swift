@@ -104,6 +104,31 @@ class subjects_test: XCTestCase {
             subj.onNext("2")
         }
     }
+    
+    func test_replaySubject() {
+        example(of: "ReplaySubject") {
+            let bag = DisposeBag()
+            
+            let subj = ReplaySubject<Int>.create(bufferSize: 2)
+            subj.onNext(1)
+            subj.onNext(2)
+            subj.onNext(3)
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "1)", event: $0)
+                }
+                .disposed(by: bag)
+            
+            subj.onNext(4)
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "2)", event: $0)
+                }
+                .disposed(by: bag)
+        }
+    }
 
     private func printEvent<T: CustomStringConvertible>(label: String, event: RxSwift.Event<T>) {
         print(label, (event.element ?? event.error) ?? event)
