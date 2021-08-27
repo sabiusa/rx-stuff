@@ -28,5 +28,31 @@ class subjects_test: XCTestCase {
             sub.disposed(by: bag)
         }
     }
+    
+    func test_publishSubject_complete() {
+        example(of: "PublishSubject complete") {
+            let bag = DisposeBag()
+            
+            let pub = PublishSubject<String>()
+            pub.on(.next("Hello"))
+            
+            let sub = pub
+                .subscribe { event in
+                    print("2)", event.element ?? event)
+                }
+            
+            pub.onNext("3")
+            pub.onCompleted()
+            
+            let sub2 = pub
+                .subscribe(
+                    onNext: { print($0) },
+                    onCompleted: { print("Already completed") }
+                )
+                
+            sub.disposed(by: bag)
+            sub2.disposed(by: bag)
+        }
+    }
 
 }
