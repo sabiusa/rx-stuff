@@ -81,10 +81,6 @@ class subjects_test: XCTestCase {
         example(of: "BehaviorSubject") {
             let bag = DisposeBag()
             
-            enum MyError: Error {
-                case myError
-            }
-            
             let subj = BehaviorSubject(value: "Intial value")
             
             subj
@@ -121,6 +117,35 @@ class subjects_test: XCTestCase {
                 .disposed(by: bag)
             
             subj.onNext(4)
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "2)", event: $0)
+                }
+                .disposed(by: bag)
+        }
+    }
+    
+    func test_replaySubject_error() {
+        example(of: "ReplaySubject error") {
+            let bag = DisposeBag()
+            
+            enum MyError: Error {
+                case myError
+            }
+            
+            let subj = ReplaySubject<Int>.create(bufferSize: 2)
+            subj.onNext(1)
+            subj.onNext(2)
+            subj.onNext(3)
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "1)", event: $0)
+                }
+                .disposed(by: bag)
+            
+            subj.onError(MyError.myError)
             
             subj
                 .subscribe {
