@@ -6,12 +6,27 @@
 //
 
 import XCTest
+import RxSwift
 
 class subjects_test: XCTestCase {
-
-    func test() {
-        let a = 1;
-        XCTAssertEqual(a, 1)
+    
+    func test_publishSubject() {
+        example(of: "PublishSubject") {
+            let bag = DisposeBag()
+            
+            let pub = PublishSubject<String>()
+            pub.on(.next("Hello"))
+            
+            let sub = pub
+                .subscribe(onNext: { val in
+                    print(val)
+                })
+            
+            pub.on(.next("World"))
+            pub.onNext("!")
+            
+            sub.disposed(by: bag)
+        }
     }
 
 }
