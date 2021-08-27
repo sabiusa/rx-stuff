@@ -76,5 +76,36 @@ class subjects_test: XCTestCase {
             sub.disposed(by: bag)
         }
     }
+    
+    func test_behaviorSubject() {
+        example(of: "BehaviorSubject") {
+            let bag = DisposeBag()
+            
+            enum MyError: Error {
+                case myError
+            }
+            
+            let subj = BehaviorSubject(value: "Intial value")
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "1)", event: $0)
+                }
+                .disposed(by: bag)
+            
+            subj.onNext("1")
+            
+            subj
+                .subscribe {
+                    self.printEvent(label: "2)", event: $0)
+                }
+                .disposed(by: bag)
+            
+            subj.onNext("2")
+        }
+    }
 
+    private func printEvent<T: CustomStringConvertible>(label: String, event: RxSwift.Event<T>) {
+        print(label, (event.element ?? event.error) ?? event)
+    }
 }
