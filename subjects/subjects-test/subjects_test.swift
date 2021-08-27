@@ -54,5 +54,27 @@ class subjects_test: XCTestCase {
             sub2.disposed(by: bag)
         }
     }
+    
+    func test_oneOff() {
+        example(of: "One Off") {
+            let bag = DisposeBag()
+            
+            let pub = PublishSubject<Int>()
+            pub.onNext(1)
+            
+            let sub = pub
+                .take(1)
+                .subscribe(
+                    onNext: { print($0) },
+                    onCompleted: { print("completed after 1") }
+                )
+            
+            pub.onNext(2)
+            pub.onNext(3)
+            pub.onNext(4)
+            
+            sub.disposed(by: bag)
+        }
+    }
 
 }
