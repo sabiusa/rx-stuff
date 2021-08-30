@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		3E5091F526DCC58800CA2FAA /* relays_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5091F426DCC58800CA2FAA /* relays_tests.swift */; };
 		3E5091F726DCC58800CA2FAA /* relays.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E5091E926DCC58800CA2FAA /* relays.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E50920126DCC5F500CA2FAA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50920026DCC5F500CA2FAA /* Helpers.swift */; };
+		3E50920226DCD32300CA2FAA /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E50920026DCC5F500CA2FAA /* Helpers.swift */; };
 		47B3CF44FE996F76882348BF /* Pods_relays.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3F23347F0ACFFE5A99C91B /* Pods_relays.framework */; };
 		F841ACFC3CE63F3C533F1A41 /* Pods_relays_tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C0B96598389EE4BFBA7AD2 /* Pods_relays_tests.framework */; };
 /* End PBXBuildFile section */
@@ -109,7 +110,6 @@
 				841F35AFA9BF90A213CBD3EE /* Pods-relays-tests.debug.xcconfig */,
 				53C48806F7B48AF90320C577 /* Pods-relays-tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -307,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E5091F526DCC58800CA2FAA /* relays_tests.swift in Sources */,
+				3E50920226DCD32300CA2FAA /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
