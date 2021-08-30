@@ -53,5 +53,47 @@ class relays_tests: XCTestCase {
             print(relay.value)
         }
     }
+    
+    func test_blackJack() {
+        example(of: "BlackJack") {
+            let bag = DisposeBag()
+            let bj = BlackJack()
+            
+            let dealtHand = PublishSubject<[(String, Int)]>()
+          
+            func deal(_ cardCount: UInt) {
+                var deck = bj.cards
+                var cardsRemaining = deck.count
+                var hand = [(String, Int)]()
+            
+                for _ in 0 ..< cardCount {
+                    let randomIndex = Int.random(in: 0 ..< cardsRemaining)
+                    hand.append(deck[randomIndex])
+                    deck.remove(at: randomIndex)
+                    cardsRemaining -= 1
+                }
+            
+                let points = bj.points(for: hand)
+                if (points > 21) {
+                    dealtHand.onError(BlackJack.HandError.busted(points: points))
+                } else {
+                    dealtHand.onNext(hand)
+                }
+            }
+          
+            dealtHand
+                .subscribe(
+                    onNext: { hand in
+                        print(bj.cardString(for: hand))
+                    },
+                    onError: { error in
+                        print("Loser: \(error)")
+                    }
+                )
+                .disposed(by: bag)
+          
+            deal(3)
+        }
+    }
 
 }
