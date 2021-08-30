@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 class relays_tests: XCTestCase {
-
+    
     func test_publishRelay() {
         example(of: "PublishRelay") {
             let bag = DisposeBag()
@@ -54,46 +54,62 @@ class relays_tests: XCTestCase {
         }
     }
     
-    func test_blackJack() {
-        example(of: "BlackJack") {
+    func test_session() {
+        example(of: "session") {
             let bag = DisposeBag()
-            let bj = BlackJack()
             
-            let dealtHand = PublishSubject<[(String, Int)]>()
-          
-            func deal(_ cardCount: UInt) {
-                var deck = bj.cards
-                var cardsRemaining = deck.count
-                var hand = [(String, Int)]()
+            enum UserSession {
+                case loggedIn, loggedOut
+            }
             
-                for _ in 0 ..< cardCount {
-                    let randomIndex = Int.random(in: 0 ..< cardsRemaining)
-                    hand.append(deck[randomIndex])
-                    deck.remove(at: randomIndex)
-                    cardsRemaining -= 1
+            enum LoginError: Error {
+                case invalidCredentials
+            }
+            
+            let relay = BehaviorRelay(value: UserSession.loggedOut)
+            relay
+                .subscribe { event in
+                    print(event)
                 }
+                .disposed(by: bag)
             
-                let points = bj.points(for: hand)
-                if (points > 21) {
-                    dealtHand.onError(BlackJack.HandError.busted(points: points))
-                } else {
-                    dealtHand.onNext(hand)
+            func logInWith(username: String, password: String, completion: (Error?) -> Void) {
+                guard username == "johnny@appleseed.com",
+                      password == "appleseed"
+                else {
+                    completion(LoginError.invalidCredentials)
+                    return
+                }
+                relay.accept(.loggedIn)
+            }
+            
+            func logOut() {
+                relay.accept(.loggedOut)
+            }
+            
+            func performActionRequiringLoggedInUser(_ action: () -> Void) {
+                if (relay.value == .loggedIn) {
+                    action()
                 }
             }
-          
-            dealtHand
-                .subscribe(
-                    onNext: { hand in
-                        print(bj.cardString(for: hand))
-                    },
-                    onError: { error in
-                        print("Loser: \(error)")
+            
+            for i in 1 ... 2 {
+                let password = i % 2 == 0 ? "appleseed" : "password"
+                
+                logInWith(username: "johnny@appleseed.com", password: password) { error in
+                    guard error == nil else {
+                        print(error!)
+                        return
                     }
-                )
-                .disposed(by: bag)
-          
-            deal(3)
+                    
+                    print("User logged in.")
+                }
+                
+                performActionRequiringLoggedInUser {
+                    print("Successfully did something only a logged in user can do.")
+                }
+            }
         }
     }
-
+    
 }
