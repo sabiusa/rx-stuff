@@ -77,8 +77,8 @@
 				3E50921D26DCEE9300CA2FAA /* AppDelegate.swift */,
 				3E50921F26DCEE9300CA2FAA /* SceneDelegate.swift */,
 				3E50922326DCEE9300CA2FAA /* Main.storyboard */,
-				3E50922626DCEE9500CA2FAA /* Assets.xcassets */,
 				3E50922826DCEE9500CA2FAA /* LaunchScreen.storyboard */,
+				3E50922626DCEE9500CA2FAA /* Assets.xcassets */,
 				3E50922B26DCEE9500CA2FAA /* Info.plist */,
 			);
 			path = rxstagram;
