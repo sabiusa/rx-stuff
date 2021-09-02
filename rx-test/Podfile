@@ -1,0 +1,10 @@
+use_frameworks!
+
+def shared_pods
+  pod 'RxSwift', '~> 5.1.1'
+  pod 'RxCocoa', '~> 5.1.1'
+end
+
+target 'rx-test' do
+    shared_pods
+end
