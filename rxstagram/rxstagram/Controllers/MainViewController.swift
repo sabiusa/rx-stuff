@@ -46,9 +46,12 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func actionAdd() {
-        let image = UIImage(named: "IMG_1907")!
-        let newImages = images.value + [image]
-        images.accept(newImages)
+//        let image = UIImage(named: "IMG_1907")!
+//        let newImages = images.value + [image]
+//        images.accept(newImages)
+        let vc = storyboard?.instantiateViewController(identifier: "PhotosViewController")
+        let photosVC = vc as! PhotosViewController
+        navigationController?.pushViewController(photosVC, animated: true)
     }
     
     func showMessage(_ title: String, description: String? = nil) {
