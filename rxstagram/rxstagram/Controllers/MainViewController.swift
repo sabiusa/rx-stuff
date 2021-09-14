@@ -29,6 +29,12 @@ class MainViewController: UIViewController {
                 preview.image = photos.collage(size: preview.frame.size)
             })
             .disposed(by: bag)
+        
+        images
+            .subscribe(onNext: { [weak self] photos in
+                self?.updateUI(photos: photos)
+            })
+            .disposed(by: bag)
     }
     
     @IBAction func actionClear() {
@@ -64,6 +70,13 @@ class MainViewController: UIViewController {
         )
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateUI(photos: [UIImage]) {
+        buttonSave.isEnabled = photos.count > 0 && photos.count.isMultiple(of: 2)
+        buttonClear.isEnabled = photos.count > 0
+        itemAdd.isEnabled = photos.count < 6
+        title = photos.count > 1 ? "\(photos.count) photos" : "Collage"
     }
     
 }
